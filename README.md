@@ -4,6 +4,10 @@
 ![Twitter Follow](https://img.shields.io/twitter/follow/loukesio)
 ![Javascript](https://img.shields.io/badge/logo-javascript-blue?logo=javascript)
 
+<h2 align="center"><b>Nextflow for RNA-seq</span></b></h2>
+
+
+
 
 ### References 
 Here are some key links that can help you build your own Nextflow pipelines <br>
