@@ -6,7 +6,41 @@
 
 <h2><b>Nextflow for RNA-seq</span></b></h2>
 
+### 1. Check the quality of the fastq.gz files  
 
+```
+#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+// Input/output paths
+params.input = '/netscratch/dep_tsiantis/grp_tsiantis/1_CURRENT_LAB_MEMBERS/LTheodosiou/Projects/GROseq/RNAseq/raw_data'
+params.output = '/netscratch/dep_tsiantis/grp_tsiantis/1_CURRENT_LAB_MEMBERS/LTheodosiou/Projects/GROseq/RNAseq/test_nextflow'
+
+process fastqc {
+
+    input:
+    path reads
+
+    output:
+    path("${params.output}/fastqc_raw/*") into ch_fastqc
+
+    script:
+    """
+    . "/netscratch/dep_tsiantis/grp_tsiantis/1_CURRENT_LAB_MEMBERS/LTheodosiou/Software/Anaconda3/etc/profile.d/conda.sh"
+    conda activate fastqc
+    mkdir -p ${params.output}/fastqc_raw
+    fastqc $reads -o ${params.output}/fastqc_raw/
+    """
+
+}
+
+workflow {
+    readsChannel = Channel.fromPath("${params.input}/*.fastq")
+    fastqc(readsChannel)
+}
+
+```
 
 
 ### References 
